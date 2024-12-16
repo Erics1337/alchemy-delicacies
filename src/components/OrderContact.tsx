@@ -1,7 +1,13 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { Select } from '@/components/ui/select'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 
 export default function OrderContact() {
   return (
@@ -14,17 +20,27 @@ export default function OrderContact() {
             <Input type="email" placeholder="Email" required />
             <Input type="tel" placeholder="Phone" required />
             <Select>
-              <option value="">Select a product</option>
-              <option value="chocolate-cake">Celestial Chocolate Cake</option>
-              <option value="cheesecake">Ethereal Cheesecake</option>
-              <option value="macarons">Mystic Macarons</option>
+              <SelectTrigger>
+                <SelectValue placeholder="Select a product" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="chocolate-cake">Celestial Chocolate Cake</SelectItem>
+                <SelectItem value="cheesecake">Ethereal Cheesecake</SelectItem>
+                <SelectItem value="macarons">Mystic Macarons</SelectItem>
+              </SelectContent>
             </Select>
             <Textarea placeholder="Special requests" className="col-span-2" />
-            <Select className="col-span-2">
-              <option value="">Delivery or Pickup?</option>
-              <option value="delivery">Delivery</option>
-              <option value="pickup">Pickup</option>
-            </Select>
+            <div className="col-span-2">
+              <Select>
+                <SelectTrigger>
+                  <SelectValue placeholder="Delivery or Pickup?" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="delivery">Delivery</SelectItem>
+                  <SelectItem value="pickup">Pickup</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
           <Button className="mt-6 w-full">Submit Order</Button>
         </form>
@@ -42,4 +58,3 @@ export default function OrderContact() {
     </section>
   )
 }
-
