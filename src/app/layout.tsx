@@ -8,6 +8,10 @@ const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfa
 export const metadata = {
   title: 'Alchemy Delicacies',
   description: 'Transforming Ingredients into Conscious Confections',
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+  },
 }
 
 export default function RootLayout({
@@ -23,4 +27,3 @@ export default function RootLayout({
     </html>
   )
 }
-
