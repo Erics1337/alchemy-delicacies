@@ -25,10 +25,9 @@ export default function VideoShowcase() {
           )}
         </div>
         <p className="text-center mt-8 text-xl italic">
-          "Baking is alchemy—every ingredient, every moment matters."
+          &ldquo;Baking is alchemy—every ingredient, every moment matters.&rdquo;
         </p>
       </div>
     </section>
   )
 }
-
