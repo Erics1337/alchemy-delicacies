@@ -2,15 +2,58 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu"
 
 const navItems = [
-  { name: 'About', href: '#about' },
-  { name: 'Products', href: '#products' },
-  { name: 'Gallery', href: '#gallery' },
-  { name: 'Testimonials', href: '#testimonials' },
-  { name: 'Contact', href: '#contact' },
+  {
+    name: 'Home',
+    href: '/',
+    sections: [
+      { name: 'About Us', href: '/#about' },
+      { name: 'Featured Products', href: '/#products' },
+      { name: 'Latest Gallery', href: '/#gallery' },
+      { name: 'Customer Reviews', href: '/#testimonials' },
+      { name: 'Contact', href: '/#contact' },
+    ],
+  },
+  {
+    name: 'Offerings',
+    href: '/offerings',
+    sections: [
+      { name: 'Cashew Cheesecakes', href: '/offerings#cashew-cheesecakes' },
+      { name: 'Gluten Free Cakes', href: '/offerings#gluten-free' },
+      { name: 'Traditional Cheesecakes', href: '/offerings#traditional' },
+      { name: 'Custom Orders', href: '/offerings#custom' },
+    ],
+  },
+  {
+    name: 'Gallery',
+    href: '/gallery',
+    sections: [
+      { name: 'Latest Creations', href: '/gallery#latest' },
+      { name: 'Seasonal Specials', href: '/gallery#seasonal' },
+      { name: 'Custom Orders', href: '/gallery#custom' },
+      { name: 'Events', href: '/gallery#events' },
+    ],
+  },
+  {
+    name: 'Testimonials',
+    href: '/testimonials',
+    sections: [
+      { name: 'Customer Reviews', href: '/testimonials#reviews' },
+      { name: 'Event Feedback', href: '/testimonials#events' },
+      { name: 'Leave a Review', href: '/testimonials#leave-review' },
+    ],
+  },
 ]
 
 export default function Navbar() {
@@ -28,9 +71,15 @@ export default function Navbar() {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
     setIsOpen(false)
-    const target = document.querySelector(href)
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' })
+    
+    // Handle both full URLs and hash links
+    if (href.startsWith('/') && !href.includes('#')) {
+      window.location.href = href
+    } else {
+      const target = document.querySelector(href.split('#')[1])
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' })
+      }
     }
   }
 
@@ -41,19 +90,47 @@ export default function Navbar() {
           <Link href="/" className={`text-2xl font-serif ${isScrolled ? 'text-gold' : 'text-white'}`}>
             Alchemy Delicacies
           </Link>
-          <div className="hidden md:flex space-x-4">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`hover:text-gold transition-colors ${isScrolled ? 'text-gray-800' : 'text-white'}`}
-                onClick={(e) => handleClick(e, item.href)}
-              >
-                {item.name}
-              </Link>
-            ))}
+          
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-4">
+            <NavigationMenu>
+              <NavigationMenuList>
+                {navItems.map((item) => (
+                  <NavigationMenuItem key={item.name}>
+                    <NavigationMenuTrigger
+                      className={`${isScrolled ? 'text-gray-800' : 'text-white'} hover:text-gold`}
+                    >
+                      {item.name}
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <div className="w-[200px] p-2">
+                        <Link
+                          href={item.href}
+                          className="block select-none rounded-md p-3 text-sm leading-none no-underline outline-none transition-colors hover:bg-gold/20 hover:text-gold focus:bg-gold/20 focus:text-gold"
+                        >
+                          View all {item.name.toLowerCase()}
+                        </Link>
+                        <div className="h-px bg-gray-200 my-2" />
+                        {item.sections.map((section) => (
+                          <Link
+                            key={section.name}
+                            href={section.href}
+                            onClick={(e) => handleClick(e, section.href)}
+                            className="block select-none rounded-md p-3 text-sm leading-none no-underline outline-none transition-colors hover:bg-gold/20 hover:text-gold focus:bg-gold/20 focus:text-gold"
+                          >
+                            {section.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                ))}
+              </NavigationMenuList>
+            </NavigationMenu>
+            <Button className="ml-4">Order Now</Button>
           </div>
-          <Button className="hidden md:block">Order Now</Button>
+
+          {/* Mobile Navigation Toggle */}
           <button
             className="md:hidden"
             onClick={() => setIsOpen(!isOpen)}
@@ -63,18 +140,33 @@ export default function Navbar() {
           </button>
         </div>
       </div>
+
+      {/* Mobile Navigation Menu */}
       {isOpen && (
         <div className="md:hidden bg-white bg-opacity-90">
           <div className="container mx-auto px-4 py-4">
             {navItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="block py-2 text-gray-800 hover:text-gold transition-colors"
-                onClick={(e) => handleClick(e, item.href)}
-              >
-                {item.name}
-              </Link>
+              <div key={item.name} className="mb-4">
+                <Link
+                  href={item.href}
+                  className="block py-2 text-gray-800 font-medium hover:text-gold transition-colors"
+                  onClick={(e) => handleClick(e, item.href)}
+                >
+                  {item.name}
+                </Link>
+                <div className="ml-4">
+                  {item.sections.map((section) => (
+                    <Link
+                      key={section.name}
+                      href={section.href}
+                      className="block py-2 text-gray-600 hover:text-gold transition-colors"
+                      onClick={(e) => handleClick(e, section.href)}
+                    >
+                      {section.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
             ))}
             <Button className="mt-4 w-full">Order Now</Button>
           </div>
@@ -83,4 +175,3 @@ export default function Navbar() {
     </nav>
   )
 }
-
