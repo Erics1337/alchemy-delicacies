@@ -9,6 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
+import { InstagramFeed } from "@/components/ui/InstagramFeed"
 
 const galleryItems = [
   {
@@ -39,17 +40,18 @@ const galleryItems = [
 
 export default function Gallery() {
   return (
-    <section className="py-16 bg-soft-pink bg-opacity-40">
+    <section className="py-16 bg-accent/5">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-serif">Our Creations</h2>
-          <Link href="/gallery" className="text-gold hover:underline">
+          <h2 className="text-3xl font-serif text-primary">Our Creations</h2>
+          <Link href="/gallery" className="text-secondary hover:text-secondary-dark hover:underline">
             View All Creations
           </Link>
         </div>
         
         <Carousel className="w-full max-w-4xl mx-auto">
           <CarouselContent>
+            <InstagramFeed limit={6} />
             {galleryItems.map((item) => (
               <CarouselItem key={item.src}>
                 <div className="relative aspect-square overflow-hidden rounded-lg shadow-lg group">
@@ -60,7 +62,7 @@ export default function Gallery() {
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
-                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-60 transition-opacity duration-300 flex items-center justify-center">
+                  <div className="absolute inset-0 bg-primary bg-opacity-0 group-hover:bg-opacity-60 transition-opacity duration-300 flex items-center justify-center">
                     <p className="text-white text-center px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       {item.caption}
                     </p>
@@ -69,8 +71,8 @@ export default function Gallery() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          <CarouselPrevious className="bg-primary/90 hover:bg-primary text-white" />
+          <CarouselNext className="bg-primary/90 hover:bg-primary text-white" />
         </Carousel>
       </div>
     </section>

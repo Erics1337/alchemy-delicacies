@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { InstagramFeed } from '@/components/ui/InstagramFeed';
 
 const galleryItems = [
   {
@@ -35,6 +36,7 @@ export default function GalleryPage() {
     <main className="py-16 min-h-screen bg-opacity-40 bg-soft-pink">
       <div className="container px-4 mx-auto">
         <h1 className="mb-12 font-serif text-4xl text-center">Our Magical Creations</h1>
+        <InstagramFeed limit={12} className="mb-12" />
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {galleryItems.map((item) => (
             <div

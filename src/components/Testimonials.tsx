@@ -28,11 +28,11 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="py-16 bg-cream">
+    <section className="py-16 bg-primary/5">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-serif">What Our Customers Say</h2>
-          <Link href="/testimonials" className="text-gold hover:underline">
+          <h2 className="text-3xl font-serif text-primary">What Our Customers Say</h2>
+          <Link href="/testimonials" className="text-secondary hover:text-secondary-dark hover:underline">
             View All Testimonials
           </Link>
         </div>
@@ -43,17 +43,17 @@ export default function Testimonials() {
                 <div className="bg-white rounded-lg shadow-lg p-8 h-full">
                   <div className="flex mb-4 justify-center">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="text-gold fill-current" />
+                      <Star key={i} className="text-accent fill-current" />
                     ))}
                   </div>
-                  <p className="mb-4 italic text-center text-lg">&quot;{testimonial.text}&quot;</p>
-                  <p className="font-semibold text-center">{testimonial.name}</p>
+                  <p className="mb-4 italic text-center text-lg text-primary-dark">&quot;{testimonial.text}&quot;</p>
+                  <p className="font-semibold text-center text-primary">{testimonial.name}</p>
                 </div>
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          <CarouselPrevious className="bg-primary/90 hover:bg-primary text-white" />
+          <CarouselNext className="bg-primary/90 hover:bg-primary text-white" />
         </Carousel>
       </div>
     </section>

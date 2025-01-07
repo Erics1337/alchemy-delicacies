@@ -16,22 +16,30 @@ module.exports = {
   	},
   	extend: {
   		colors: {
-  			gold: '#D4AF37',
-  			cream: '#FFFDD0',
-  			'soft-pink': '#F7E1D7',
+  			primary: {
+  				DEFAULT: '#1B4D3E', // dark green as primary
+  				light: '#2A6B57',
+  				dark: '#123429'
+  			},
+  			secondary: {
+  				DEFAULT: '#b68d40', // tan as secondary
+  				light: '#c4a265',
+  				dark: '#8f6e32'
+  			},
+  			accent: {
+  				DEFAULT: '#d6ad60', // gold as accent
+  				light: '#e0bf82',
+  				dark: '#b38d40'
+  			},
+  			background: {
+  				DEFAULT: '#f4ebd0', // cream as background
+  				light: '#f8f2e0',
+  				dark: '#e6d9b3'
+  			},
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
   			ring: 'hsl(var(--ring))',
-  			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
-  			primary: {
-  				DEFAULT: 'hsl(var(--primary))',
-  				foreground: 'hsl(var(--primary-foreground))'
-  			},
-  			secondary: {
-  				DEFAULT: 'hsl(var(--secondary))',
-  				foreground: 'hsl(var(--secondary-foreground))'
-  			},
   			destructive: {
   				DEFAULT: 'hsl(var(--destructive))',
   				foreground: 'hsl(var(--destructive-foreground))'
@@ -39,10 +47,6 @@ module.exports = {
   			muted: {
   				DEFAULT: 'hsl(var(--muted))',
   				foreground: 'hsl(var(--muted-foreground))'
-  			},
-  			accent: {
-  				DEFAULT: 'hsl(var(--accent))',
-  				foreground: 'hsl(var(--accent-foreground))'
   			},
   			popover: {
   				DEFAULT: 'hsl(var(--popover))',

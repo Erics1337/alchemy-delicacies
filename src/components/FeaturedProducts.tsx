@@ -88,11 +88,11 @@ export default function FeaturedProducts() {
   );
 
   return (
-    <section className="py-16 bg-soft-pink bg-opacity-40">
+    <section className="py-16 bg-secondary/5">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-serif">Featured Delicacies</h2>
-          <Link href="/offerings" className="text-primary hover:underline">
+          <h2 className="text-3xl font-serif text-primary">Featured Delicacies</h2>
+          <Link href="/offerings" className="text-secondary hover:text-secondary-dark hover:underline">
             View All Offerings →
           </Link>
         </div>
@@ -111,7 +111,7 @@ export default function FeaturedProducts() {
               {allProducts.map((product) => (
                 <CarouselItem key={product.name} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
                   <div className="p-1">
-                    <Card className="bg-white bg-opacity-95 hover:shadow-lg transition-shadow duration-200">
+                    <Card className="bg-white hover:shadow-lg transition-shadow duration-200">
                       <CardContent className="p-0">
                         <div className="relative aspect-[4/3]">
                           <Image
@@ -123,19 +123,19 @@ export default function FeaturedProducts() {
                           />
                         </div>
                         <div className="p-4">
-                          <p className="text-sm text-gold mb-2">{product.category}</p>
-                          <h4 className="text-lg font-semibold mb-2">{product.name}</h4>
+                          <p className="text-sm text-accent mb-2">{product.category}</p>
+                          <h4 className="text-lg font-semibold mb-2 text-primary">{product.name}</h4>
                           <div className="mb-4">
-                            <ul className="text-gray-600 text-sm">
+                            <ul className="text-primary-dark text-sm">
                               {product.dietaryInfo.slice(0, 2).map((info) => (
                                 <li key={info} className="inline-block mr-2">• {info}</li>
                               ))}
                               {product.dietaryInfo.length > 2 && (
-                                <li className="inline-block text-gray-400">+{product.dietaryInfo.length - 2} more</li>
+                                <li className="inline-block text-secondary">+{product.dietaryInfo.length - 2} more</li>
                               )}
                             </ul>
                           </div>
-                          <Button className="w-full bg-gold hover:bg-gold/90 text-white">Order Now</Button>
+                          <Button className="w-full bg-secondary hover:bg-secondary-light text-white">Order Now</Button>
                         </div>
                       </CardContent>
                     </Card>
@@ -144,10 +144,10 @@ export default function FeaturedProducts() {
               ))}
             </CarouselContent>
             <div className="absolute -left-4 top-1/2 -translate-y-1/2">
-              <CarouselPrevious className="bg-white/90 hover:bg-white" />
+              <CarouselPrevious className="bg-primary/90 hover:bg-primary text-white" />
             </div>
             <div className="absolute -right-4 top-1/2 -translate-y-1/2">
-              <CarouselNext className="bg-white/90 hover:bg-white" />
+              <CarouselNext className="bg-primary/90 hover:bg-primary text-white" />
             </div>
           </Carousel>
         </div>

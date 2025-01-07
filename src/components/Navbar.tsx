@@ -2,13 +2,13 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Menu, X, ChevronDown } from 'lucide-react'
+import Image from 'next/image'
+import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
@@ -84,11 +84,21 @@ export default function Navbar() {
   }
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white bg-opacity-90 shadow-md' : 'bg-transparent'}`}>
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-primary/90 shadow-md' : 'bg-transparent'}`}>
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
-          <Link href="/" className={`text-2xl font-serif ${isScrolled ? 'text-gold' : 'text-white'}`}>
-            Alchemy Delicacies
+          <Link href="/" className="flex items-center space-x-2">
+            <div className="w-10 h-10 relative">
+              <Image
+                src="/logos/alchemy-logo-02.svg"
+                alt="Alchemy Delicacies Logo"
+                fill
+                className="object-contain [filter:invert(74%)_sepia(19%)_saturate(681%)_hue-rotate(356deg)_brightness(89%)_contrast(90%)]"
+              />
+            </div>
+            <span className={`text-2xl font-serif ${isScrolled ? 'text-accent' : 'text-white'}`}>
+              Alchemy Delicacies
+            </span>
           </Link>
           
           {/* Desktop Navigation */}
@@ -98,25 +108,25 @@ export default function Navbar() {
                 {navItems.map((item) => (
                   <NavigationMenuItem key={item.name}>
                     <NavigationMenuTrigger
-                      className={`${isScrolled ? 'text-gray-800' : 'text-white'} hover:text-gold`}
+                      className={`${isScrolled ? 'text-white' : 'text-white'} hover:text-accent`}
                     >
                       {item.name}
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
-                      <div className="w-[200px] p-2">
+                      <div className="w-[200px] p-2 bg-primary">
                         <Link
                           href={item.href}
-                          className="block select-none rounded-md p-3 text-sm leading-none no-underline outline-none transition-colors hover:bg-gold/20 hover:text-gold focus:bg-gold/20 focus:text-gold"
+                          className="block select-none rounded-md p-3 text-sm leading-none no-underline outline-none transition-colors text-white hover:bg-accent/20 hover:text-accent focus:bg-accent/20 focus:text-accent"
                         >
                           View all {item.name.toLowerCase()}
                         </Link>
-                        <div className="h-px bg-gray-200 my-2" />
+                        <div className="h-px bg-secondary/20 my-2" />
                         {item.sections.map((section) => (
                           <Link
                             key={section.name}
                             href={section.href}
                             onClick={(e) => handleClick(e, section.href)}
-                            className="block select-none rounded-md p-3 text-sm leading-none no-underline outline-none transition-colors hover:bg-gold/20 hover:text-gold focus:bg-gold/20 focus:text-gold"
+                            className="block select-none rounded-md p-3 text-sm leading-none no-underline outline-none transition-colors text-white hover:bg-accent/20 hover:text-accent focus:bg-accent/20 focus:text-accent"
                           >
                             {section.name}
                           </Link>
@@ -127,7 +137,7 @@ export default function Navbar() {
                 ))}
               </NavigationMenuList>
             </NavigationMenu>
-            <Button className="ml-4">Order Now</Button>
+            <Button className="ml-4 bg-secondary hover:bg-secondary-light text-white">Order Now</Button>
           </div>
 
           {/* Mobile Navigation Toggle */}
@@ -136,20 +146,20 @@ export default function Navbar() {
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >
-            {isOpen ? <X className={isScrolled ? 'text-gray-800' : 'text-white'} /> : <Menu className={isScrolled ? 'text-gray-800' : 'text-white'} />}
+            {isOpen ? <X className={isScrolled ? 'text-white' : 'text-white'} /> : <Menu className={isScrolled ? 'text-white' : 'text-white'} />}
           </button>
         </div>
       </div>
 
       {/* Mobile Navigation Menu */}
       {isOpen && (
-        <div className="md:hidden bg-white bg-opacity-90">
+        <div className="md:hidden bg-primary">
           <div className="container mx-auto px-4 py-4">
             {navItems.map((item) => (
               <div key={item.name} className="mb-4">
                 <Link
                   href={item.href}
-                  className="block py-2 text-gray-800 font-medium hover:text-gold transition-colors"
+                  className="block py-2 text-white font-medium hover:text-accent transition-colors"
                   onClick={(e) => handleClick(e, item.href)}
                 >
                   {item.name}
@@ -159,7 +169,7 @@ export default function Navbar() {
                     <Link
                       key={section.name}
                       href={section.href}
-                      className="block py-2 text-gray-600 hover:text-gold transition-colors"
+                      className="block py-2 text-secondary hover:text-accent transition-colors"
                       onClick={(e) => handleClick(e, section.href)}
                     >
                       {section.name}
@@ -168,7 +178,7 @@ export default function Navbar() {
                 </div>
               </div>
             ))}
-            <Button className="mt-4 w-full">Order Now</Button>
+            <Button className="mt-4 w-full bg-secondary hover:bg-secondary-light text-white">Order Now</Button>
           </div>
         </div>
       )}
