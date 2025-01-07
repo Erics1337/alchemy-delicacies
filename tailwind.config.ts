@@ -83,6 +83,9 @@ module.exports = {
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out'
+  		},
+  		filter: {
+  			'accent-color': 'invert(74%) sepia(19%) saturate(681%) hue-rotate(356deg) brightness(89%) contrast(90%)'
   		}
   	}
   },

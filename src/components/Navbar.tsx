@@ -93,7 +93,7 @@ export default function Navbar() {
                 src="/logos/alchemy-logo-02.svg"
                 alt="Alchemy Delicacies Logo"
                 fill
-                className="object-contain [filter:invert(74%)_sepia(19%)_saturate(681%)_hue-rotate(356deg)_brightness(89%)_contrast(90%)]"
+                className="object-contain filter-accent-color"
               />
             </div>
             <span className={`text-2xl font-serif ${isScrolled ? 'text-accent' : 'text-white'}`}>
